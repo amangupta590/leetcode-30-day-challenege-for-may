@@ -1,0 +1,21 @@
+    unordered_map<char,int>mp;
+        int n=ransomNote.size();
+        int m=magazine.size();
+        for(auto c: magazine )
+            mp[c]++;
+        
+        for(auto ff: ransomNote){
+            if(mp.find(ff)!=mp.end()){
+                mp[ff]--;
+                if(mp[ff]==0){
+                    mp.erase(ff);
+                }
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
+        
+    }
+};
