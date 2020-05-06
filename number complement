@@ -1,0 +1,14 @@
+class Solution {
+public:
+    int findComplement(int num) {
+        int mymask=0;
+        int arr=num;
+        while(arr){
+            arr=arr>>1;
+            mymask=mymask<<1;
+            mymask=mymask|1;
+        }
+        return mymask^num;
+        
+    }
+};
