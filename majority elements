@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        unordered_map<int,int>mp;
+        for(auto ss:nums){
+            mp[ss]++;
+        }
+        int n=nums.size()/2;
+        for(auto xx:mp){
+            if((xx.second)>n){
+                return xx.first;
+            }
+        }
+        return -1;
+        
+    }
+};
