@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int maxSubarraySumCircular(vector<int>& A) {
+       int n=A.size();
+        int max_straight_sum=INT_MIN;
+        int min_straight_sum=INT_MAX;
+        int arraysum=0;
+        int temp_maxsum=0;
+        int temp_minsum=0;
+        for(int i=0;i<A.size();i++){
+            arraysum+=A[i];
+            temp_maxsum+=A[i];
+            max_straight_sum=max_straight_sum<temp_maxsum?temp_maxsum:max_straight_sum;
+            temp_maxsum=temp_maxsum<0?0:temp_maxsum;
+            
+            temp_minsum+=A[i];
+            min_straight_sum=min_straight_sum>temp_minsum?temp_minsum:min_straight_sum;
+            temp_minsum=temp_minsum>0?0:temp_minsum;
+        }
+        if(arraysum==min_straight_sum){
+            return max_straight_sum;
+        }
+        return max(max_straight_sum,(arraysum-min_straight_sum));
+    }
+};
