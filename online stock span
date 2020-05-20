@@ -1,0 +1,28 @@
+class StockSpanner {
+private:
+    stack < pair<int, int> > st;
+    int day;
+public:
+    StockSpanner() {
+        st.push({ INT_MAX, -1 });
+        day = 0;
+    }
+    
+    int next(int price) {
+        int topPrice = st.top().first, topPriceDay = st.top().second, span;
+        
+        if(price < topPrice) {
+            st.push({ price, day });
+            span = day - topPriceDay;
+        }
+        else {
+            while(!st.empty() && st.top().first <= price) {
+                st.pop();
+            }
+            span = day - st.top().second;
+            st.push({ price, day });
+        }
+        day += 1;
+        return span;
+    }
+};
