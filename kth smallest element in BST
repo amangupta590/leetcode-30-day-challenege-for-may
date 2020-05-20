@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int>arr;
+    int kthSmallest(TreeNode* root, int k) {
+        mera(root,k);
+        return arr[k-1];
+    }
+    void mera(TreeNode* root, int k){
+        if(!root)
+            return;
+        if(arr.size()==k){
+            return ;
+        }
+        mera(root->left,k);
+        arr.push_back(root->val);
+//          if(arr.size()==k){
+             
+//             return ;
+//         }
+        mera(root->right,k);
+    }
+};
