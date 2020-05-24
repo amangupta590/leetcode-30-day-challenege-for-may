@@ -1,0 +1,26 @@
+ */
+class Solution {
+public:
+    TreeNode* bstnew(TreeNode*& root,int val){
+        if(!root){
+            root=new TreeNode(val);
+        }
+        else{
+            if(root->val>val){
+                root->left=bstnew(root->left,val);
+            }
+            else{
+                root->right=bstnew(root->right,val);
+            }
+        }
+        return root;
+    }
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        TreeNode* root=NULL;
+        for(auto var:preorder){
+            root=bstnew(root,var);
+        }
+        return root;
+        
+    }
+};
