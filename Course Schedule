@@ -1,0 +1,42 @@
+class Solution {
+public:
+   map<int,list<int>>l;
+    bool cycle_helper(int node,bool *visited,bool *stack){
+        visited[node]=true;
+        stack[node]=true;
+        for(int nbr :l[node]){
+            if(stack[nbr]==true){
+                return true;
+            }
+            else if(visited[nbr]==false){
+                bool node_mila=cycle_helper(nbr,visited,stack);
+                if(node_mila==true){
+                    return true;
+                }
+            }
+        }
+        stack[node]=false;
+        return false;
+    }
+    
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        if(prerequisites.size()==0  or prerequisites.size()==1){
+            return true;
+        }
+        for(int i=0;i<prerequisites.size();i++){
+            l[prerequisites[i][0]].push_back(prerequisites[i][1]);
+        }
+        
+        bool *visited=new bool[numCourses];
+        bool *stack=new bool[numCourses];
+        for(int i=0;i<numCourses;i++){
+            visited[i]=stack[i]=false;
+        }
+        for(int i=0;i<prerequisites.size();i++){
+            if(cycle_helper(prerequisites[i][0],visited,stack))
+                return false;
+        }
+        return true;
+        
+    }
+};
