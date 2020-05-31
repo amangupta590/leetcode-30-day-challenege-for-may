@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minDistance(string word1, string word2) {
+        if(word1.length()==0)
+            return word2.length();
+        if(word2.length()==0)
+            return word1.length();
+        
+        vector<vector<int>>meridp(word1.length()+1,vector<int>(word2.length()+1,0));
+        for(int i=1;i<=word1.length();i++)
+            meridp[i][0]=i;
+        for(int j=1;j<=word2.length();j++)
+            meridp[0][j]=j;
+        for(int i=1;i<=word1.length();i++)
+        {
+            for(int j=1;j<=word2.length();j++)
+            {
+                if(word2[j-1]==word1[i-1])
+                    meridp[i][j]=meridp[i-1][j-1];
+                else
+                    meridp[i][j]=1+min(meridp[i-1][j-1],min(meridp[i-1][j],meridp[i][j-1]));
+            }
+        }
+        return meridp[word1.length()][word2.length()];
+    }
+};
